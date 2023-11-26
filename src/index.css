@@ -1,0 +1,31 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+p,
+span,
+h1,
+h2,
+h3,
+button,
+a,
+input,
+label {
+  font-family: "Roboto", sans-serif;
+}
+
+:root {
+  --white: hsl(0, 0%, 100%);
+  --lightGrayViolet: hsl(270, 3%, 87%);
+  --darkGrayViolet: hsl(279, 6%, 55%);
+  --veryDarkViolet: hsl(278, 68%, 11%);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
