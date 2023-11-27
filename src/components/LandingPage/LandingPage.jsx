@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   BackCardContainer,
   BackgroundContainer,
+  ButtonContainer,
   CardCvcSpan,
   CardDetails,
   CardDetailsInputs,
@@ -35,6 +36,8 @@ export const LandingPage = () => {
 
   function onChangeCardNumber(e) {
     setCardNumber(e.target.value);
+
+    // console.log("123456789101112".replace(/(\d{4}(?!\s))/g, "$1 "));
   }
 
   function onChangeCardMonth(e) {
@@ -58,7 +61,7 @@ export const LandingPage = () => {
             <FrontCardContainer>
               <img src={cardFront} alt="" />
               <CardHolderSpan>{cardHolder}</CardHolderSpan>
-              <CardNumberSpan>{cardNumber}</CardNumberSpan>
+              <CardNumberSpan>{cardNumber.replace(/(\d{4}(?!\s))/g, "$1 ")}</CardNumberSpan>
               <CardMonthSpan>{cardMonth}</CardMonthSpan>
               <CardYearSpan>{cardYear}</CardYearSpan>
             </FrontCardContainer>
@@ -87,6 +90,9 @@ export const LandingPage = () => {
                 <input onChange={onChangeCvc} type="number" placeholder="CVC" />
               </CardDetailsInputs>
             </CardDetails>
+            <ButtonContainer>
+              <button>Confirm</button>
+            </ButtonContainer>
           </form>
         </FormContainer>
       </LandingContainer>

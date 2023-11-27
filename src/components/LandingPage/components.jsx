@@ -166,3 +166,21 @@ export const CardCvcSpan = styled.span`
   font-size: 18px;
   text-transform: uppercase;
 `;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  button {
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--veryDarkViolet);
+    color: var(--lightGrayViolet);
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+`;
