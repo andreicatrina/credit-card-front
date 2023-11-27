@@ -13,6 +13,7 @@ import {
   CardNumberSpan,
   CardYearSpan,
   ClientDetails,
+  ErrorContainer,
   FormContainer,
   FrontCardContainer,
   LandingContainer,
@@ -24,10 +25,13 @@ import cardBack from "../../assets/bg-card-back.png";
 
 export const LandingPage = () => {
   const [cardHolder, setcardHolder] = useState("");
-  const [cardNumber, setCardNumber] = useState();
-  const [cardMonth, setCardMonth] = useState();
-  const [cardYear, setCardYear] = useState();
-  const [cvc, setCvc] = useState();
+  const [cardNumber, setCardNumber] = useState("");
+  const [cardMonth, setCardMonth] = useState("");
+  const [cardYear, setCardYear] = useState("");
+  const [cvc, setCvc] = useState("");
+  const [errorHolder, setErrorHolder] = useState("");
+  const [errorNumber, setErrorNumber] = useState("");
+  const [errorDate, setErrorDate] = useState("");
 
   function onChangeCardHolder(e) {
     console.log(e.target.value);
@@ -52,6 +56,30 @@ export const LandingPage = () => {
     setCvc(e.target.value);
   }
 
+  function onSubmitForm(event) {
+    event.preventDefault();
+
+    setErrorHolder("");
+    setErrorNumber("");
+    setErrorDate("");
+
+    if (cardHolder === "") {
+      setErrorHolder("Please complete field!");
+    }
+
+    if (cardNumber === "") {
+      setErrorNumber("Please complete field!");
+    }
+
+    if (cardMonth === "" || cardYear === "" || cvc === "") {
+      setErrorDate("Please complete all 3 fields!");
+    }
+  }
+
+  function onClickButton(event) {
+    onSubmitForm(event);
+  }
+
   return (
     <LandingSection>
       <LandingContainer>
@@ -72,12 +100,14 @@ export const LandingPage = () => {
           </CardImagesContainer>
         </BackgroundContainer>
         <FormContainer>
-          <form action="">
+          <form onSubmit={onSubmitForm}>
             <ClientDetails>
               <label htmlFor="">CARDHOLDER NAME</label>
               <input onChange={onChangeCardHolder} type="text" placeholder="e.g. John Smith" />
+              <span style={{ color: "red" }}>{errorHolder}</span>
               <label htmlFor="">CARD NUMBER</label>
               <input onChange={onChangeCardNumber} type="number" placeholder="e.g. 1234 5678 9100 0000" />
+              <span style={{ color: "red" }}>{errorNumber}</span>
             </ClientDetails>
             <CardDetails>
               <CardDetailsLabels>
@@ -89,9 +119,12 @@ export const LandingPage = () => {
                 <input onChange={onChangeCardYear} type="number" placeholder="YY" />
                 <input onChange={onChangeCvc} type="number" placeholder="CVC" />
               </CardDetailsInputs>
+              <ErrorContainer>
+                <span style={{ color: "red" }}>{errorDate}</span>
+              </ErrorContainer>
             </CardDetails>
             <ButtonContainer>
-              <button>Confirm</button>
+              <button onClick={onClickButton}>Confirm</button>
             </ButtonContainer>
           </form>
         </FormContainer>

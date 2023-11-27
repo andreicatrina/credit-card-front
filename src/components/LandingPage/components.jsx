@@ -97,6 +97,11 @@ export const CardDetailsInputs = styled.div`
   }
 `;
 
+export const ErrorContainer = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
 export const CardImagesContainer = styled.div`
   display: flex;
   flex-direction: column;
