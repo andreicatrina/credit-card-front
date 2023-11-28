@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with React.
+This project was made with React.
 
 ### In the project directory, you can run:
 
