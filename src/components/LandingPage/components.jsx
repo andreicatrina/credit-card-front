@@ -189,3 +189,37 @@ export const ButtonContainer = styled.div`
     cursor: pointer;
   }
 `;
+
+export const ThankYouContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  h3 {
+    margin: 0;
+    padding: 8px 0;
+  }
+
+  p {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--darkGrayViolet);
+    margin: 0;
+    padding: 8px 0 24px 0;
+  }
+
+  button {
+    width: 100%;
+    max-width: 300px;
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--veryDarkViolet);
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 500;
+  }
+`;
+
+export const CompleteImageContainer = styled.div``;

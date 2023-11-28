@@ -13,15 +13,19 @@ import {
   CardNumberSpan,
   CardYearSpan,
   ClientDetails,
+  CompleteImageContainer,
   ErrorContainer,
   FormContainer,
   FrontCardContainer,
   LandingContainer,
   LandingSection,
+  ThankYouContainer,
 } from "./components";
+
 import bg from "../../assets/bg-main-desktop.png";
 import cardFront from "../../assets/bg-card-front.png";
 import cardBack from "../../assets/bg-card-back.png";
+import completeSvg from "../../assets/icon-complete.svg";
 
 export const LandingPage = () => {
   const [cardHolder, setcardHolder] = useState("");
@@ -32,6 +36,7 @@ export const LandingPage = () => {
   const [errorHolder, setErrorHolder] = useState("");
   const [errorNumber, setErrorNumber] = useState("");
   const [errorDate, setErrorDate] = useState("");
+  const [dataSaved, setDataSaved] = useState(false);
 
   function onChangeCardHolder(e) {
     console.log(e.target.value);
@@ -65,19 +70,21 @@ export const LandingPage = () => {
 
     if (cardHolder === "") {
       setErrorHolder("Please complete field!");
-    }
-
-    if (cardNumber === "") {
+    } else if (cardNumber === "") {
       setErrorNumber("Please complete field!");
-    }
-
-    if (cardMonth === "" || cardYear === "" || cvc === "") {
+    } else if (cardMonth === "" || cardYear === "" || cvc === "") {
       setErrorDate("Please complete all 3 fields!");
+    } else {
+      setDataSaved(true);
     }
   }
 
   function onClickButton(event) {
     onSubmitForm(event);
+  }
+
+  function onClickReload() {
+    window.location.reload();
   }
 
   return (
@@ -100,33 +107,44 @@ export const LandingPage = () => {
           </CardImagesContainer>
         </BackgroundContainer>
         <FormContainer>
-          <form onSubmit={onSubmitForm}>
-            <ClientDetails>
-              <label htmlFor="">CARDHOLDER NAME</label>
-              <input onChange={onChangeCardHolder} type="text" placeholder="e.g. John Smith" />
-              <span style={{ color: "red" }}>{errorHolder}</span>
-              <label htmlFor="">CARD NUMBER</label>
-              <input onChange={onChangeCardNumber} type="number" placeholder="e.g. 1234 5678 9100 0000" />
-              <span style={{ color: "red" }}>{errorNumber}</span>
-            </ClientDetails>
-            <CardDetails>
-              <CardDetailsLabels>
-                <label htmlFor="">EXP. DATE (MM/YY)</label>
-                <label htmlFor="">CVC</label>
-              </CardDetailsLabels>
-              <CardDetailsInputs>
-                <input onChange={onChangeCardMonth} type="number" placeholder="MM" />
-                <input onChange={onChangeCardYear} type="number" placeholder="YY" />
-                <input onChange={onChangeCvc} type="number" placeholder="CVC" />
-              </CardDetailsInputs>
-              <ErrorContainer>
-                <span style={{ color: "red" }}>{errorDate}</span>
-              </ErrorContainer>
-            </CardDetails>
-            <ButtonContainer>
-              <button onClick={onClickButton}>Confirm</button>
-            </ButtonContainer>
-          </form>
+          {dataSaved ? (
+            <ThankYouContainer>
+              <CompleteImageContainer>
+                <img src={completeSvg} alt="" />
+              </CompleteImageContainer>
+              <h3>Thank You!</h3>
+              <p>We've added your card details</p>
+              <button onClick={onClickReload}>Continue</button>
+            </ThankYouContainer>
+          ) : (
+            <form onSubmit={onSubmitForm}>
+              <ClientDetails>
+                <label htmlFor="">CARDHOLDER NAME</label>
+                <input onChange={onChangeCardHolder} type="text" placeholder="e.g. John Smith" />
+                <span style={{ color: "red" }}>{errorHolder}</span>
+                <label htmlFor="">CARD NUMBER</label>
+                <input onChange={onChangeCardNumber} type="number" placeholder="e.g. 1234 5678 9100 0000" />
+                <span style={{ color: "red" }}>{errorNumber}</span>
+              </ClientDetails>
+              <CardDetails>
+                <CardDetailsLabels>
+                  <label htmlFor="">EXP. DATE (MM/YY)</label>
+                  <label htmlFor="">CVC</label>
+                </CardDetailsLabels>
+                <CardDetailsInputs>
+                  <input onChange={onChangeCardMonth} type="number" placeholder="MM" />
+                  <input onChange={onChangeCardYear} type="number" placeholder="YY" />
+                  <input onChange={onChangeCvc} type="number" placeholder="CVC" />
+                </CardDetailsInputs>
+                <ErrorContainer>
+                  <span style={{ color: "red" }}>{errorDate}</span>
+                </ErrorContainer>
+              </CardDetails>
+              <ButtonContainer>
+                <button onClick={onClickButton}>Confirm</button>
+              </ButtonContainer>
+            </form>
+          )}
         </FormContainer>
       </LandingContainer>
     </LandingSection>
